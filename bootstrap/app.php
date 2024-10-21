@@ -11,9 +11,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->group('web', [
-            \App\Http\Middleware\IsAdmin::class
-        ]);
+        // $middleware->group('web', [
+        //     \App\Http\Middleware\IsAdmin::class
+        // ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
