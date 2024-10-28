@@ -10,10 +10,10 @@ Product Gallery
      <div class="container-fluid">
           <div class="dashboard-heading">
                <h2 class="dashboard-title">
-                    Product
+                    Product Gallery
                </h2>
                <p class="dashboard-subtitle">
-                    List of Gallery
+                    List of Product Gallery
                </p>
           </div>
           <div class="dashboard-content">
@@ -22,7 +22,7 @@ Product Gallery
                          <div class="card">
                               <div class="card-body">
                                    <a href="{{ route('product-gallery.create') }}" class="btn btn-primary mb-3">
-                                        + Tambah Gallery Baru
+                                        + Tambah Product Gallery Baru
                                    </a>
                                    <div class="table-responsive">
                                         <table class="table table-hover scroll-horizontal-vertical w-100" id="crudTable">

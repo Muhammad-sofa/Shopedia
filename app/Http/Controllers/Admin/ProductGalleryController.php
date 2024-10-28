@@ -64,12 +64,10 @@ class ProductGalleryController extends Controller
      */
     public function create()
     {
-        $users = User::all();
-        $categories = Category::all();
+        $products = Product::all();
         
-        return view('pages.admin.product-galleries.create', [
-            'users' => $users,
-            'categories' => $categories
+        return view('pages.admin.product-gallery.create', [
+            'products' => $products
         ]);
     }
 
@@ -80,13 +78,11 @@ class ProductGalleryController extends Controller
     {
         $data = $request->all();
 
-        $data['slug'] = Str::slug($request->name);
+        $data['photos'] = $request->file('photos')->store('assets/product', 'public');
 
-        $data['password'] = bcrypt($request->password);
+        ProductGallery::create($data);
 
-        Product::create($data);
-
-        return redirect()->route('product.index');
+        return redirect()->route('product-gallery.index');
     }
 
     /**
@@ -94,9 +90,7 @@ class ProductGalleryController extends Controller
      */
     public function show(string $id)
     {
-        $data = Product::findOrFail($id);
-
-        return redirect()->route('product.edit', $data->id);
+        //
     }
 
     /**
@@ -104,15 +98,7 @@ class ProductGalleryController extends Controller
      */
     public function edit(string $id)
     {
-        $item = Product::findOrFail($id);
-        $users = User::all();
-        $categories = Category::all();
-
-        return view('pages.admin.product-galleries.edit', [
-            'item' => $item,
-            'users' => $users,
-            'categories' => $categories
-        ]);
+        //
     }
 
     /**
@@ -120,21 +106,7 @@ class ProductGalleryController extends Controller
      */
     public function update(ProductGalleryRequest $request, string $id)
     {
-        $data = $request->all();
-
-        $item = Product::findOrFail($id);
-        
-        $data['slug'] = Str::slug($request->name);
-
-        // if($request->password) {
-        //     $data['password'] = bcrypt($request->password);
-        // } else {
-        //     unset($data['password']);
-        // }
-
-        $item->update($data);
-
-        return redirect()->route('product.index');
+        //
     }
 
     /**
@@ -142,9 +114,9 @@ class ProductGalleryController extends Controller
      */
     public function destroy(string $id)
     {
-        $item = Product::findOrFail($id);
+        $item = ProductGallery::findOrFail($id);
         $item->delete();
 
-        return redirect()->route('product.index');
+        return redirect()->route('product-gallery.index');
     }
 }
