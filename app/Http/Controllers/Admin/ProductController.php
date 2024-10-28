@@ -101,9 +101,13 @@ class ProductController extends Controller
     public function edit(string $id)
     {
         $item = Product::findOrFail($id);
+        $users = User::all();
+        $categories = Category::all();
 
         return view('pages.admin.product.edit', [
-            'item' => $item
+            'item' => $item,
+            'users' => $users,
+            'categories' => $categories
         ]);
     }
 
@@ -115,12 +119,14 @@ class ProductController extends Controller
         $data = $request->all();
 
         $item = Product::findOrFail($id);
+        
+        $data['slug'] = Str::slug($request->name);
 
-        if($request->password) {
-            $data['password'] = bcrypt($request->password);
-        } else {
-            unset($data['password']);
-        }
+        // if($request->password) {
+        //     $data['password'] = bcrypt($request->password);
+        // } else {
+        //     unset($data['password']);
+        // }
 
         $item->update($data);
 
