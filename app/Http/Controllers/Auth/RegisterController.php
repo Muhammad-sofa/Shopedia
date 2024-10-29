@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
 use App\Models\Category;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -93,5 +94,10 @@ class RegisterController extends Controller
 
     public function success() {
         return view('auth.success');
+    }
+
+    public function check(Request $request) 
+    {
+        return User::where('email', $request->email)->count() > 0 ? 'unavailable' : 'available';
     }
 }
