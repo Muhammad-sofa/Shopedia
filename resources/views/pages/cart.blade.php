@@ -41,60 +41,30 @@ Store Cart Page
                                    </tr>
                               </thead>
                               <tbody>
-                                   <tr>
-                                        <td style="width: 20%;">
-                                             <img src="/images/product-cart-1.jpg" alt="" class="cart-image">
-                                        </td>
-                                        <td style="width: 35%;">
-                                             <div class="product-title">Sofa Ternyaman</div>
-                                             <div class="product-subtitle">by Sofa</div>
-                                        </td>
-                                        <td style="width: 35%;">
-                                             <div class="product-title">Rp. 30.000.000</div>
-                                             <div class="product-subtitle">Rupiah</div>
-                                        </td>
-                                        <td style="width: 20%;">
-                                             <a href="#" class="btn btn-remove-cart">
-                                                  Remove
-                                             </a>
-                                        </td>
-                                   </tr>
-                                   <tr>
-                                        <td style="width: 20%;">
-                                             <img src="/images/product-cart-2.jpg" alt="" class="cart-image">
-                                        </td>
-                                        <td style="width: 35%;">
-                                             <div class="product-title">Sneaker</div>
-                                             <div class="product-subtitle">by Sofa</div>
-                                        </td>
-                                        <td style="width: 35%;">
-                                             <div class="product-title">Rp. 20.000.000</div>
-                                             <div class="product-subtitle">Rupiah</div>
-                                        </td>
-                                        <td style="width: 20%;">
-                                             <a href="#" class="btn btn-remove-cart">
-                                                  Remove
-                                             </a>
-                                        </td>
-                                   </tr>
-                                   <tr>
-                                        <td style="width: 20%;">
-                                             <img src="/images/product-cart-3.jpg" alt="" class="cart-image">
-                                        </td>
-                                        <td style="width: 35%;">
-                                             <div class="product-title">Coffe Holder</div>
-                                             <div class="product-subtitle">by Sofa</div>
-                                        </td>
-                                        <td style="width: 35%;">
-                                             <div class="product-title">Rp. 10.000.000</div>
-                                             <div class="product-subtitle">Rupiah</div>
-                                        </td>
-                                        <td style="width: 20%;">
-                                             <a href="#" class="btn btn-remove-cart">
-                                                  Remove
-                                             </a>
-                                        </td>
-                                   </tr>
+                                   @foreach ($carts as $cart)
+                                        <tr>
+                                             @if($cart->product->galleries)
+                                                  <td style="width: 20%;">
+                                                       <img src="{{ Storage::url($cart->product->galleries->first()->photos) }}" alt="" class="cart-image">
+                                                  </td>
+                                             @endif
+                                             <td style="width: 35%;">
+                                                  <div class="product-title">{{ $cart->product->name }}</div>
+                                                  <div class="product-subtitle">by {{ $cart->product->user->store_name }}</div>
+                                             </td>
+                                             <td style="width: 35%;">
+                                                  <div class="product-title">Rp. {{ number_format($cart->product->price) }}</div>
+                                                  <div class="product-subtitle">Rupiah</div>
+                                             </td>
+                                             <td style="width: 20%;">
+                                                  <form action="{{ route('cart-delete', $cart->products_id) }}" method="POST">
+                                                       <button type="submit" class="btn btn-remove-cart">
+                                                            Remove
+                                                       </button>
+                                                  </form>
+                                             </td>
+                                        </tr>
+                                   @endforeach
                               </tbody>
                          </table>
                     </div>
