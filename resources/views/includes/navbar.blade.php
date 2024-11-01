@@ -45,8 +45,16 @@
                               </div>
                          </li>
                          <li class="nav-item">
-                              <a href="#" class="nav-link d-inline-block mt-2">
-                                   <img src="/images/icon-cart-empty.svg" alt="">
+                              <a href="{{ route('cart') }}" class="nav-link d-inline-block mt-2">
+                                   @php
+                                        $carts = \App\Cart::where('users_id', Auth::user()->id)->count();
+                                   @endphp
+                                   @if($carts > 0)
+                                        <img src="/images/icon-cart-filled.svg">
+                                        <div class="card-badge">{{ $carts }}</div>
+                                   @else
+                                        <img src="/images/icon-cart-empty.svg">
+                                   @endif
                               </a>
                          </li>
                     </ul>
@@ -54,13 +62,13 @@
                     <!--Mobile Menu-->
                     <ul class="navbar-nav d-block d-lg-none">
                          <li class="nav-item">
-                              <a href="#" class="nav-link">
-                                   Hi, Sofa
+                              <a href="{{ route('dashboard') }}" class="nav-link">
+                                   Hi, {{ Auth::user()->name }}
                               </a>
                          </li>
                          <li class="nav-item">
-                              <a href="" class="nav-link d-inline-block">
-                                   Card
+                              <a href="{{ route('cart') }}" class="nav-link d-inline-block">
+                                   Cart
                               </a>
                          </li>
                     </ul>
