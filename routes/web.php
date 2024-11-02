@@ -11,6 +11,9 @@ Route::get('/cart', [App\Http\Controllers\CartController::class, 'index'])->name
 Route::delete('/cart/{id}', [App\Http\Controllers\CartController::class, 'delete'])->name('cart-delete');
 Route::get('/success', [App\Http\Controllers\CartController::class, 'success'])->name('success');
 
+Route::get('/checkout', [App\Http\Controllers\CheckoutController::class, 'process'])->name('checkout');
+Route::get('/checkout/callback', [App\Http\Controllers\CheckoutController::class, 'callback'])->name('midtrans-callback');
+
 Route::get('/register/success', [App\Http\Controllers\Auth\RegisterController::class, 'success'])->name('register-success');
 
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');

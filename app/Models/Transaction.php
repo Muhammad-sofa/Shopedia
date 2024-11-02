@@ -13,6 +13,7 @@ class Transaction extends Model
         'user_id',
         'insurance_price',
         'shipping_price',
+        'transaction_status',
         'total_price',
         'code'
     ];
