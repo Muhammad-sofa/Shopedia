@@ -19,76 +19,26 @@ Store Dashboard Product
           <div class="dashboard-content">
                <div class="row">
                     <div class="col-12">
-                         <a href="/dashboard-products-create.html" class="btn btn-success">Add New
+                         <a href="{{ route('dashboard-product-create') }}" class="btn btn-success">Add New
                               Product</a>
                     </div>
                </div>
                <div class="row mt-4">
+                    @foreach ($products as $product)
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                         <a href="/dashboard-products-details.html" class="card card-dashboard-product d-block">
+                         <a href="{{ route('dashboard-product-details', $product->id) }}" class="card card-dashboard-product d-block">
                               <div class="card-body">
-                                   <img src="/images/product-card-1.png" alt="" class="w-100 mb-2">
+                                   <img src="{{ Storage::url($product->galleries->first()->photos ?? '') }}" alt="" class="w-100 mb-2">
                                    <div class="product-title">
-                                        Coffe
+                                        {{ $product->name }}
                                    </div>
                                    <div class="product-category">
-                                        Drink
+                                        {{ $product->category->name }}
                                    </div>
                               </div>
                          </a>
                     </div>
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                         <a href="/dashboard-products-details.html" class="card card-dashboard-product d-block">
-                              <div class="card-body">
-                                   <img src="/images/product-card-2.png" alt="" class="w-100 mb-2">
-                                   <div class="product-title">
-                                        Shoe
-                                   </div>
-                                   <div class="product-category">
-                                        Fashion
-                                   </div>
-                              </div>
-                         </a>
-                    </div>
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                         <a href="/dashboard-products-details.html" class="card card-dashboard-product d-block">
-                              <div class="card-body">
-                                   <img src="/images/product-card-3.png" alt="" class="w-100 mb-2">
-                                   <div class="product-title">
-                                        Coffe
-                                   </div>
-                                   <div class="product-category">
-                                        Drink
-                                   </div>
-                              </div>
-                         </a>
-                    </div>
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                         <a href="/dashboard-products-details.html" class="card card-dashboard-product d-block">
-                              <div class="card-body">
-                                   <img src="/images/product-card-4.png" alt="" class="w-100 mb-2">
-                                   <div class="product-title">
-                                        Shoe
-                                   </div>
-                                   <div class="product-category">
-                                        Fashion
-                                   </div>
-                              </div>
-                         </a>
-                    </div>
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                         <a href="/dashboard-products-details.html" class="card card-dashboard-product d-block">
-                              <div class="card-body">
-                                   <img src="/images/product-card-5.png" alt="" class="w-100 mb-2">
-                                   <div class="product-title">
-                                        Sofa
-                                   </div>
-                                   <div class="product-category">
-                                        Furniture
-                                   </div>
-                              </div>
-                         </a>
-                    </div>
+                    @endforeach
                </div>
           </div>
      </div>
